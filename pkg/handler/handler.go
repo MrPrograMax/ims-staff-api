@@ -16,15 +16,27 @@ func NewHandler(services *service.Services) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	//api := router.Group("/staff/") //h.userIdentity
-	//{
-	//	roles := api.Group("/roles")
-	//	{
-	//		roles.POST("/add", h.createRole)
-	//		roles.GET("/", h.getRolesList)
-	//		roles.GET("/:id", h.getRoleByName)
-	//	}
-	//}
+	task := router.Group("/task")
+	{
+		task.GET("/", h.GetTasksList)                 // Получение всех задач
+		task.GET("/status/:name", h.GetTasksByStatus) // Получение списка задач по статусу
+		task.POST("/create", h.CreateTask)            // Создать задачу
+		task.PUT("/:id", h.UpdateTask)                // Редактировать задачу по ID
+		task.DELETE("/delete", h.DeleteTask)          // Удалить задачу
+
+		status := task.Group("/status")
+		{
+			//TODO СДЕЛАТЬ СТАТИЧЕСКИЕ СТАТУСЫ :))))) Чтобы админ случайно не создал невалидный
+			status.GET("/", h.GetStatusList) // Получение всех статусов задач
+		}
+	}
+
+	management := router.Group("/management") //h.userIdentity
+	{
+		management.GET("/", h.GetStaffList)                 // Посмотреть всех сотрудиков и их задачи
+		management.GET("/:id", h.GetWorkerTasksById)        // Посмотреть список задач сотрудника по ID
+		management.POST("/:id/task/:task_id", h.AssignTask) // Менеджер отдает задачу для работника по его ID
+	}
 
 	return router
 }
