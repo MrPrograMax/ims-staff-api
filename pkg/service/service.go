@@ -7,21 +7,22 @@ import (
 
 type Task interface {
 	GetTasksList() ([]models.Task, error)
-	GetTasksByStatus() ([]models.Task, error)
+	GetTasksByStatus(statusName string) ([]models.Task, error)
 	GetTaskByID(id int64) (models.Task, error)
-	CreateTask(task models.Task) (int64, error)
+	CreateTask(task models.Task, statusId int64) (int64, error)
 	UpdateTask(taskId int64, input models.Task) error
-	DeleteTask() error
+	DeleteTask(taskId, statusId int64) error
 }
 
 type Status interface {
 	GetStatusList() ([]models.TaskStatus, error)
+	GetStatusIdByName(status string) (int64, error)
 }
 
 type Staff interface {
-	//TODO GetStaffList()
-	//TODO GetWorkerTasksById()
-	//TODO AssignTask()
+	GetStaffList() ([]models.UserDto, error)
+	GetWorkerTasksById(workerId int64) ([]models.Task, error)
+	AssignTask() error
 }
 
 type Services struct {

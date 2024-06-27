@@ -13,5 +13,4 @@ func (h *Handler) GetStatusList(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, statuses)
-
 }

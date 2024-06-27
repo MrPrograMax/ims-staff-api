@@ -9,10 +9,14 @@ type StatusService struct {
 	repo repository.Status
 }
 
-func NewStatusService(repo repository.Status) *StatusService {
-	return &StatusService{repo: repo}
+func (s *StatusService) GetStatusList() ([]models.TaskStatus, error) {
+	return s.repo.GetStatusList()
 }
 
-func (s StatusService) GetStatusList() ([]models.TaskStatus, error) {
-	return s.repo.GetStatusList()
+func (s *StatusService) GetStatusIdByName(status string) (int64, error) {
+	return s.repo.GetStatusIdByName(status)
+}
+
+func NewStatusService(repo repository.Status) *StatusService {
+	return &StatusService{repo: repo}
 }
