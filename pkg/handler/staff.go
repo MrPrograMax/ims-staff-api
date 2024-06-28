@@ -7,6 +7,15 @@ import (
 	"strconv"
 )
 
+// GetStaffList godoc
+// @Summary Get list of staff
+// @Description Get list of all staff members
+// @Tags UserDto
+// @Accept json
+// @Produce json
+// @Success 200 {array} models.UserDto
+// @Failure 500 {object} errorResponse
+// @Router /management [get]
 func (h *Handler) GetStaffList(c *gin.Context) {
 	staff, err := h.services.GetStaffList()
 	if err != nil {
@@ -17,6 +26,16 @@ func (h *Handler) GetStaffList(c *gin.Context) {
 	c.JSON(http.StatusOK, staff)
 }
 
+// GetWorkerTasksById godoc
+// @Summary Get worker's tasks by ID
+// @Description Get list of tasks assigned to a worker by worker ID
+// @Tags UserDto
+// @Accept json
+// @Produce json
+// @Param id path int true "Worker ID"
+// @Success 200 {array} models.Task
+// @Failure 400 {object} errorResponse
+// @Router /management/{id} [get]
 func (h *Handler) GetWorkerTasksById(c *gin.Context) {
 	workerId, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
@@ -32,6 +51,18 @@ func (h *Handler) GetWorkerTasksById(c *gin.Context) {
 	c.JSON(http.StatusOK, tasks)
 }
 
+// AssignTask godoc
+// @Summary Assign a task to a worker
+// @Description Assign a task to a worker by their IDs
+// @Tags UserDto
+// @Accept json
+// @Produce json
+// @Param worker_id path int true "Worker ID"
+// @Param task_id path int true "Task ID"
+// @Success 200 {object} statusResponse
+// @Failure 400 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /management/{worker_id}/task/{task_id} [post]
 func (h *Handler) AssignTask(c *gin.Context) {
 	workerId, err := strconv.ParseInt(c.Param("worker_id"), 10, 64)
 	if err != nil {

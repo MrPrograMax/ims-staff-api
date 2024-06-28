@@ -5,6 +5,15 @@ import (
 	"net/http"
 )
 
+// GetStatusList godoc
+// @Summary Get list of statuses
+// @Description Get list of all task statuses
+// @Tags status
+// @Accept json
+// @Produce json
+// @Success 200 {array} models.TaskStatus
+// @Failure 204 {object} errorResponse
+// @Router /task/status [get]
 func (h *Handler) GetStatusList(c *gin.Context) {
 	statuses, err := h.services.Status.GetStatusList()
 	if err != nil {

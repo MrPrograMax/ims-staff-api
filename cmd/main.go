@@ -11,6 +11,17 @@ import (
 	"ims-staff-api/pkg/service"
 )
 
+//	@title			ims-staff-api
+//	@version		1.0
+//	@description	API server for IMS application
+
+//	@host		localhost:8000
+//	@BasePath	/
+
+//	@securityDefinitions.apikey	ApiKeyAuth
+//  @in header
+//  @name Authorization
+
 func main() {
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 

@@ -8,6 +8,15 @@ import (
 	"strconv"
 )
 
+// GetTasksList godoc
+// @Summary Get list of tasks
+// @Description Get list of all tasks
+// @Tags task
+// @Accept json
+// @Produce json
+// @Success 200 {array} models.Task
+// @Failure 204 {object} errorResponse
+// @Router /task [get]
 func (h *Handler) GetTasksList(c *gin.Context) {
 	tasks, err := h.services.GetTasksList()
 	if err != nil {
@@ -18,6 +27,16 @@ func (h *Handler) GetTasksList(c *gin.Context) {
 	c.JSON(http.StatusOK, tasks)
 }
 
+// GetTasksByStatus godoc
+// @Summary Get tasks by status
+// @Description Get list of tasks by status name
+// @Tags task
+// @Accept json
+// @Produce json
+// @Param name path string true "Status Name"
+// @Success 200 {array} models.Task
+// @Failure 204 {object} errorResponse
+// @Router /task/status/{name} [get]
 func (h *Handler) GetTasksByStatus(c *gin.Context) {
 	name := c.Param("name")
 
@@ -30,6 +49,17 @@ func (h *Handler) GetTasksByStatus(c *gin.Context) {
 	c.JSON(http.StatusOK, tasks)
 }
 
+// CreateTask godoc
+// @Summary Create a new task
+// @Description Create a new task with the provided information
+// @Tags task
+// @Accept json
+// @Produce json
+// @Param input body models.Task true "Task info"
+// @Success 200 {object} idResponse
+// @Failure 400 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /task [post]
 func (h *Handler) CreateTask(c *gin.Context) {
 	var input models.Task
 	if err := c.BindJSON(&input); err != nil {
@@ -49,11 +79,22 @@ func (h *Handler) CreateTask(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
+	c.JSON(http.StatusOK, idResponse{
+		Id: id,
 	})
 }
 
+// GetTaskById godoc
+// @Summary Get task by ID
+// @Description Get task details by ID
+// @Tags task
+// @Accept json
+// @Produce json
+// @Param id path int true "Task ID"
+// @Success 200 {object} models.Task
+// @Failure 400 {object} errorResponse
+// @Failure 204 {object} errorResponse
+// @Router /task/{id} [get]
 func (h *Handler) GetTaskById(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
@@ -70,6 +111,18 @@ func (h *Handler) GetTaskById(c *gin.Context) {
 	c.JSON(http.StatusOK, task)
 }
 
+// UpdateTask godoc
+// @Summary Update task
+// @Description Update task details by ID
+// @Tags task
+// @Accept json
+// @Produce json
+// @Param id path int true "Task ID"
+// @Param input body models.UpdateTask true "Update Task info"
+// @Success 200 {object} statusResponse
+// @Failure 400 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /task/{id} [put]
 func (h *Handler) UpdateTask(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
@@ -93,6 +146,17 @@ func (h *Handler) UpdateTask(c *gin.Context) {
 	})
 }
 
+// DeleteTask godoc
+// @Summary Delete task
+// @Description Delete task by ID
+// @Tags task
+// @Accept json
+// @Produce json
+// @Param id path int true "Task ID"
+// @Success 200 {object} statusResponse
+// @Failure 400 {object} errorResponse
+// @Failure 500 {object} errorResponse
+// @Router /task/{id} [delete]
 func (h *Handler) DeleteTask(c *gin.Context) {
 	taskId, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {

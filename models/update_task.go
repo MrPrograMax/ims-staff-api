@@ -5,6 +5,8 @@ import (
 	"reflect"
 )
 
+// UpdateTask represents the data required to update a task
+// @Description UpdateTask model
 type UpdateTask struct {
 	Title       *string `json:"title" db:"title"`
 	Description *string `json:"description" db:"description"`
