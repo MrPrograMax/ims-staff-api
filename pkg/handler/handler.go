@@ -35,8 +35,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 		status := task.Group("/status")
 		{
-			task.GET("/:name", h.GetTasksByStatus) // Получение списка задач по статусу
-			status.GET("", h.GetStatusList)        // Получение всех статусов задач
+			status.GET("/:name", h.GetTasksByStatus) // Получение списка задач по статусу
+			status.GET("", h.GetStatusList)          // Получение всех статусов задач
 		}
 	}
 
