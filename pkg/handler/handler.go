@@ -22,7 +22,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	task := router.Group("/task", h.userIdentity)
+	task := router.Group("/task") //h.userIdentity
 	{
 		task.GET("", h.GetTasksList)                  // Получение всех задач
 		task.GET("/status/:name", h.GetTasksByStatus) // Получение списка задач по статусу
@@ -40,7 +40,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		}
 	}
 
-	management := router.Group("/management", h.userIdentity) //h.userIdentity
+	management := router.Group("/management") //h.userIdentity
 	{
 		management.GET("", h.GetStaffList)           // Посмотреть всех сотрудиков и их задачи
 		management.GET("/:id", h.GetWorkerTasksById) // Посмотреть список задач сотрудника по ID
