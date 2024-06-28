@@ -2,7 +2,6 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/sirupsen/logrus"
 	"ims-staff-api/models"
 	"net/http"
 	"strconv"
@@ -20,7 +19,12 @@ import (
 func (h *Handler) GetTasksList(c *gin.Context) {
 	tasks, err := h.services.GetTasksList()
 	if err != nil {
-		newErrorResponse(c, http.StatusNoContent, "Error of get all tasks")
+		newErrorResponse(c, http.StatusInternalServerError, "Error of get all tasks")
+		return
+	}
+
+	if tasks == nil {
+		c.JSON(http.StatusNoContent, tasks)
 		return
 	}
 
@@ -67,7 +71,7 @@ func (h *Handler) CreateTask(c *gin.Context) {
 		return
 	}
 
-	statusId, err := h.services.GetStatusIdByName("Ожидает")
+	statusId, err := h.services.GetStatusIdByName("Waiting")
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, "Error of get status name")
 		return
@@ -164,12 +168,11 @@ func (h *Handler) DeleteTask(c *gin.Context) {
 		return
 	}
 
-	statusId, err := h.services.GetStatusIdByName("Отменена")
+	statusId, err := h.services.GetStatusIdByName("Canceled")
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, "Error of cancel status")
 		return
 	}
-	logrus.Println(statusId, "Отменена")
 
 	task, err := h.services.GetTaskByID(taskId)
 	if err != nil {

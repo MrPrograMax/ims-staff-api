@@ -14,4 +14,4 @@ CREATE TABLE task (
 );
 
 INSERT INTO taskStatus (name)
-VALUES ('Ожидает'), ('Выполнена'), ('В работе'), ('Отменена');
+VALUES ('Waiting'), ('Progressing'), ('Completed'), ('Canceled');

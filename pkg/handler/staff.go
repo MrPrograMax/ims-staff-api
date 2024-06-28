@@ -23,6 +23,11 @@ func (h *Handler) GetStaffList(c *gin.Context) {
 		return
 	}
 
+	if staff == nil {
+		c.JSON(http.StatusNoContent, staff)
+		return
+	}
+
 	c.JSON(http.StatusOK, staff)
 }
 
@@ -83,11 +88,17 @@ func (h *Handler) AssignTask(c *gin.Context) {
 
 	task.UserId = workerId
 
+	statusId, err := h.services.GetStatusIdByName("Waiting")
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, "Error of get status name")
+		return
+	}
+
 	updateTask := models.UpdateTask{
 		Title:       &task.Title,
 		Description: &task.Description,
-		StatusId:    &task.StatusId,
-		UserId:      &task.UserId,
+		StatusId:    &statusId,
+		UserId:      &workerId,
 	}
 
 	if err := h.services.UpdateTask(taskId, updateTask); err != nil {
