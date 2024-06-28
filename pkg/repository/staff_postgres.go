@@ -3,6 +3,7 @@ package repository
 import (
 	"fmt"
 	"github.com/jmoiron/sqlx"
+	"github.com/sirupsen/logrus"
 	"ims-staff-api/models"
 )
 
@@ -18,6 +19,7 @@ func (s *StaffPostgres) GetStaffList() ([]models.UserDto, error) {
 	var workerList []models.UserDto
 	query := fmt.Sprintf(`SELECT u.id, u.full_name, u.role_id FROM %s u`, userTable)
 	err := s.db.Select(&workerList, query)
+	logrus.Println(err)
 
 	return workerList, err
 }

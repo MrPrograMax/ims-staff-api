@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	"ims-staff-api/models"
 	"net/http"
 	"strconv"
 )
@@ -9,7 +10,7 @@ import (
 func (h *Handler) GetStaffList(c *gin.Context) {
 	staff, err := h.services.GetStaffList()
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, "Error of get all groups")
+		newErrorResponse(c, http.StatusInternalServerError, "Error of get all staff")
 		return
 	}
 
@@ -51,7 +52,14 @@ func (h *Handler) AssignTask(c *gin.Context) {
 
 	task.UserId = workerId
 
-	if err := h.services.UpdateTask(taskId, task); err != nil {
+	updateTask := models.UpdateTask{
+		Title:       &task.Title,
+		Description: &task.Description,
+		StatusId:    &task.StatusId,
+		UserId:      &task.UserId,
+	}
+
+	if err := h.services.UpdateTask(taskId, updateTask); err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 	}
 

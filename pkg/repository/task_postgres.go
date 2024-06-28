@@ -40,7 +40,7 @@ func (t *TaskPostgres) GetTasksByStatus(statusName string) ([]models.Task, error
 func (t *TaskPostgres) GetTaskByID(id int64) (models.Task, error) {
 	var task models.Task
 
-	query := fmt.Sprintf("SELECT * FROM %s WHERE id = $1", taskTable)
+	query := fmt.Sprintf("SELECT id, title, description, status_id, COALESCE(user_id, 0) as user_id FROM %s WHERE id = $1", taskTable)
 	err := t.db.Get(&task, query, id)
 
 	return task, err
@@ -59,15 +59,16 @@ func (t *TaskPostgres) CreateTask(task models.Task, statusId int64) (int64, erro
 	return id, nil
 }
 
-func (t *TaskPostgres) UpdateTask(taskId int64, input models.Task) error {
+func (t *TaskPostgres) UpdateTask(taskId int64, input models.UpdateTask) error {
 	placeholders := make([]string, 0)
 	args := make([]interface{}, 0)
 	argId := 1
 
-	prodType := reflect.ValueOf(input).Elem()
-	for i := 0; i < prodType.NumField(); i++ {
-		valueField := prodType.Field(i)
-		typeField := prodType.Type().Field(i)
+	prodValue := reflect.ValueOf(input)
+
+	for i := 0; i < prodValue.NumField(); i++ {
+		valueField := prodValue.Field(i)
+		typeField := prodValue.Type().Field(i)
 		if valueField.Kind() == reflect.Ptr && !valueField.IsNil() {
 			dbName := typeField.Tag.Get("db")
 			if dbName == "" {
@@ -75,7 +76,7 @@ func (t *TaskPostgres) UpdateTask(taskId int64, input models.Task) error {
 			}
 
 			placeholders = append(placeholders, fmt.Sprintf("%s=$%d", dbName, argId))
-			args = append(args, valueField.Elem())
+			args = append(args, valueField.Elem().Interface())
 			argId++
 		}
 	}
@@ -92,22 +93,6 @@ func (t *TaskPostgres) UpdateTask(taskId int64, input models.Task) error {
 	return err
 }
 
-func (t *TaskPostgres) DeleteTask(taskId, statusId int64) error {
-	tx, err := t.db.Begin()
-
-	task, err := t.GetTaskByID(taskId)
-	if err != nil {
-		tx.Rollback()
-		return err
-	}
-
-	task.StatusId = statusId
-
-	err = t.UpdateTask(taskId, task)
-	if err != nil {
-		tx.Rollback()
-		return err
-	}
-
-	return tx.Commit()
+func (t *TaskPostgres) DeleteTask() error {
+	return nil
 }

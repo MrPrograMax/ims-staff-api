@@ -26,9 +26,8 @@ func (r *StatusPostgres) GetStatusList() ([]models.TaskStatus, error) {
 
 func (r *StatusPostgres) GetStatusIdByName(status string) (int64, error) {
 	var statusId int64
-	name := "Ожидает"
 	query := fmt.Sprintf("SELECT id FROM %s WHERE name=$1", taskStatusTable)
-	err := r.db.Get(&statusId, query, name)
+	err := r.db.Get(&statusId, query, status)
 
 	if statusId == 0 {
 		return -1, errors.New("Wait status for task not found")

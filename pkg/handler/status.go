@@ -8,7 +8,7 @@ import (
 func (h *Handler) GetStatusList(c *gin.Context) {
 	statuses, err := h.services.Status.GetStatusList()
 	if err != nil {
-		newErrorResponse(c, http.StatusInternalServerError, "Error of get statuses")
+		newErrorResponse(c, http.StatusNoContent, "Error of get statuses")
 		return
 	}
 

@@ -29,10 +29,10 @@ func (t *TaskService) CreateTask(task models.Task, statusId int64) (int64, error
 	return t.repo.CreateTask(task, statusId)
 }
 
-func (t *TaskService) UpdateTask(taskId int64, input models.Task) error {
+func (t *TaskService) UpdateTask(taskId int64, input models.UpdateTask) error {
 	return t.repo.UpdateTask(taskId, input)
 }
 
-func (t *TaskService) DeleteTask(taskId, statusId int64) error {
-	return t.repo.DeleteTask(taskId, statusId)
+func (t *TaskService) DeleteTask() error {
+	return t.repo.DeleteTask()
 }

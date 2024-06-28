@@ -10,8 +10,8 @@ type Task interface {
 	GetTasksByStatus(statusName string) ([]models.Task, error)
 	GetTaskByID(id int64) (models.Task, error)
 	CreateTask(task models.Task, statusId int64) (int64, error)
-	UpdateTask(taskId int64, input models.Task) error
-	DeleteTask(taskId, statusId int64) error
+	UpdateTask(taskId int64, input models.UpdateTask) error
+	DeleteTask() error
 }
 
 type Status interface {
