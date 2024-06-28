@@ -21,3 +21,13 @@ INSERT INTO role (name) VALUES ('admin');
 INSERT INTO role (name) VALUES ('manager');
 INSERT INTO role (name) VALUES ('worker');
 
+INSERT INTO "user" (full_name, login, password, role_id)
+    VALUES ('Linus Torvalds', 'admin', '123', 1);
+
+INSERT INTO "user" (full_name, login, password, role_id)
+VALUES ('Mr.Beast', 'manager1', '345', 2);
+
+INSERT INTO "user" (full_name, login, password, role_id)
+VALUES ('Cat1', 'worker1', '678', 3);
+INSERT INTO "user" (full_name, login, password, role_id)
+VALUES ('Cat2', 'worker2', '912', 3);
