@@ -46,7 +46,12 @@ func (h *Handler) GetTasksByStatus(c *gin.Context) {
 
 	tasks, err := h.services.GetTasksByStatus(name)
 	if err != nil {
-		newErrorResponse(c, http.StatusNoContent, "Error of get task by ID")
+		newErrorResponse(c, http.StatusInternalServerError, "Error of get task by ID")
+		return
+	}
+
+	if tasks == nil {
+		c.JSON(http.StatusNoContent, tasks)
 		return
 	}
 
