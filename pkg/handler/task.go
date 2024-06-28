@@ -30,7 +30,7 @@ func (h *Handler) GetTasksList(c *gin.Context) {
 // GetTasksByStatus godoc
 // @Summary Get tasks by status
 // @Description Get list of tasks by status name
-// @Tags Task
+// @Tags Status
 // @Accept json
 // @Produce json
 // @Param name path string true "Status Name"

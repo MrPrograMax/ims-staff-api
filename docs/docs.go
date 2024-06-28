@@ -257,7 +257,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Task"
+                    "Status"
                 ],
                 "summary": "Get tasks by status",
                 "parameters": [

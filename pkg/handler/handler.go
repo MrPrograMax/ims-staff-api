@@ -24,9 +24,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	task := router.Group("/task") //h.userIdentity
 	{
-		task.GET("", h.GetTasksList)                  // Получение всех задач
-		task.GET("/status/:name", h.GetTasksByStatus) // Получение списка задач по статусу
-		task.GET("/:id", h.GetTaskById)               //Получение задачи по ID
+		task.GET("", h.GetTasksList)    // Получение всех задач
+		task.GET("/:id", h.GetTaskById) //Получение задачи по ID
 
 		task.POST("", h.CreateTask) // Создать задачу
 
@@ -36,7 +35,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 		status := task.Group("/status")
 		{
-			status.GET("", h.GetStatusList) // Получение всех статусов задач
+			task.GET("/:name", h.GetTasksByStatus) // Получение списка задач по статусу
+			status.GET("", h.GetStatusList)        // Получение всех статусов задач
 		}
 	}
 

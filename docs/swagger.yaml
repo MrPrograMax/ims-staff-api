@@ -335,7 +335,7 @@ paths:
             $ref: '#/definitions/handler.errorResponse'
       summary: Get tasks by status
       tags:
-      - Task
+      - Status
 securityDefinitions:
   ApiKeyAuth:
     in: header
