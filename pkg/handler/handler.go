@@ -6,7 +6,7 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"ims-staff-api/pkg/service"
 
-	_ "github.com/MrPrograMax/ims-staff-api/docs"
+	_ "ims-staff-api/docs"
 )
 
 type Handler struct {

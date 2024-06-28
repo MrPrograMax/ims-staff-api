@@ -535,8 +535,6 @@ var SwaggerInfo = &swag.Spec{
 	Description:      "API server for IMS application",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	LeftDelim:        "{{",
-	RightDelim:       "}}",
 }
 
 func init() {
