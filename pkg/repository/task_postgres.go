@@ -32,7 +32,6 @@ func (t *TaskPostgres) GetTasksByStatus(statusName string) ([]models.Task, error
 
 	query := fmt.Sprintf("SELECT t.id, t.title, t.description, t.status_id, COALESCE(t.user_id, 0) AS user_id FROM %s t JOIN %s ts ON t.status_id = ts.id WHERE ts.name = $1", taskTable, taskStatusTable)
 	err := t.db.Select(&task, query, statusName)
-	logrus.Println(err)
 
 	return task, err
 }
