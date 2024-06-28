@@ -14,7 +14,7 @@ type statusResponse struct {
 }
 
 type idResponse struct {
-	Id int64 `json:"status"`
+	Id int64 `json:"id"`
 }
 
 func newErrorResponse(c *gin.Context, statusCode int, message string) {
