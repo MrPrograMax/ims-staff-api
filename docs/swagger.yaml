@@ -1,0 +1,344 @@
+basePath: /
+definitions:
+  handler.errorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  handler.idResponse:
+    properties:
+      status:
+        type: integer
+    type: object
+  handler.statusResponse:
+    properties:
+      status:
+        type: string
+    type: object
+  models.Task:
+    description: Task model
+    properties:
+      description:
+        type: string
+      status_id:
+        type: integer
+      title:
+        type: string
+      user_id:
+        type: integer
+    required:
+    - title
+    type: object
+  models.TaskStatus:
+    description: TaskStatus model
+    properties:
+      name:
+        type: string
+    type: object
+  models.UpdateTask:
+    description: UpdateTask model
+    properties:
+      description:
+        type: string
+      status_id:
+        type: integer
+      title:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.UserDto:
+    description: UserDto model
+    properties:
+      full_name:
+        type: string
+      role_id:
+        type: integer
+    required:
+    - full_name
+    - role_id
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: API server for IMS application
+  title: ims-staff-api
+  version: "1.0"
+paths:
+  /management:
+    get:
+      consumes:
+      - application/json
+      description: Get list of all staff members
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.UserDto'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Get list of staff
+      tags:
+      - UserDto
+  /management/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get list of tasks assigned to a worker by worker ID
+      parameters:
+      - description: Worker ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Task'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Get worker's tasks by ID
+      tags:
+      - UserDto
+  /management/{worker_id}/task/{task_id}:
+    post:
+      consumes:
+      - application/json
+      description: Assign a task to a worker by their IDs
+      parameters:
+      - description: Worker ID
+        in: path
+        name: worker_id
+        required: true
+        type: integer
+      - description: Task ID
+        in: path
+        name: task_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.statusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Assign a task to a worker
+      tags:
+      - UserDto
+  /task:
+    get:
+      consumes:
+      - application/json
+      description: Get list of all tasks
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Task'
+            type: array
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Get list of tasks
+      tags:
+      - task
+    post:
+      consumes:
+      - application/json
+      description: Create a new task with the provided information
+      parameters:
+      - description: Task info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.Task'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.idResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Create a new task
+      tags:
+      - task
+  /task/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete task by ID
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.statusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Delete task
+      tags:
+      - task
+    get:
+      consumes:
+      - application/json
+      description: Get task details by ID
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Task'
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Get task by ID
+      tags:
+      - task
+    put:
+      consumes:
+      - application/json
+      description: Update task details by ID
+      parameters:
+      - description: Task ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update Task info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateTask'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.statusResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Update task
+      tags:
+      - task
+  /task/status:
+    get:
+      consumes:
+      - application/json
+      description: Get list of all task statuses
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.TaskStatus'
+            type: array
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Get list of statuses
+      tags:
+      - status
+  /task/status/{name}:
+    get:
+      consumes:
+      - application/json
+      description: Get list of tasks by status name
+      parameters:
+      - description: Status Name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Task'
+            type: array
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/handler.errorResponse'
+      summary: Get tasks by status
+      tags:
+      - task
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
