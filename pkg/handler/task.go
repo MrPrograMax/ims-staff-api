@@ -65,7 +65,7 @@ func (h *Handler) GetTasksByStatus(c *gin.Context) {
 // @Accept json
 // @Produce json
 // @Param input body models.Task true "Task info"
-// @Success 200 {object} idResponse
+// @Success 200 {object} int
 // @Failure 400 {object} errorResponse
 // @Failure 500 {object} errorResponse
 // @Router /task [post]
@@ -88,8 +88,8 @@ func (h *Handler) CreateTask(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, idResponse{
-		Id: id,
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"id": id,
 	})
 }
 
