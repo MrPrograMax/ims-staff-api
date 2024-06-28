@@ -1,7 +1,7 @@
 package models
 
 // UserDto represents a user data transfer object
-// @Description UserDto model
+// @Description Worker model
 type UserDto struct {
 	Id       int64  `json:"-"`
 	FullName string `json:"full_name" binding:"required" db:"full_name"`

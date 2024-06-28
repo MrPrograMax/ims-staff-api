@@ -25,7 +25,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "UserDto"
+                    "Worker"
                 ],
                 "summary": "Get list of staff",
                 "responses": {
@@ -57,7 +57,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "UserDto"
+                    "Worker"
                 ],
                 "summary": "Get worker's tasks by ID",
                 "parameters": [
@@ -98,7 +98,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "UserDto"
+                    "Worker"
                 ],
                 "summary": "Assign a task to a worker",
                 "parameters": [
@@ -149,7 +149,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Get list of tasks",
                 "responses": {
@@ -179,7 +179,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Create a new task",
                 "parameters": [
@@ -225,7 +225,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "status"
+                    "Status"
                 ],
                 "summary": "Get list of statuses",
                 "responses": {
@@ -257,7 +257,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Get tasks by status",
                 "parameters": [
@@ -298,7 +298,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Get task by ID",
                 "parameters": [
@@ -340,7 +340,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Update task",
                 "parameters": [
@@ -391,7 +391,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Delete task",
                 "parameters": [
@@ -500,7 +500,7 @@ const docTemplate = `{
             }
         },
         "models.UserDto": {
-            "description": "UserDto model",
+            "description": "Worker model",
             "type": "object",
             "required": [
                 "full_name",

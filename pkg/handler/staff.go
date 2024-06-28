@@ -10,7 +10,7 @@ import (
 // GetStaffList godoc
 // @Summary Get list of staff
 // @Description Get list of all staff members
-// @Tags UserDto
+// @Tags Worker
 // @Accept json
 // @Produce json
 // @Success 200 {array} models.UserDto
@@ -29,7 +29,7 @@ func (h *Handler) GetStaffList(c *gin.Context) {
 // GetWorkerTasksById godoc
 // @Summary Get worker's tasks by ID
 // @Description Get list of tasks assigned to a worker by worker ID
-// @Tags UserDto
+// @Tags Worker
 // @Accept json
 // @Produce json
 // @Param id path int true "Worker ID"
@@ -54,7 +54,7 @@ func (h *Handler) GetWorkerTasksById(c *gin.Context) {
 // AssignTask godoc
 // @Summary Assign a task to a worker
 // @Description Assign a task to a worker by their IDs
-// @Tags UserDto
+// @Tags Worker
 // @Accept json
 // @Produce json
 // @Param worker_id path int true "Worker ID"

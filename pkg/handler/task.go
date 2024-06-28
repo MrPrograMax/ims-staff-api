@@ -11,7 +11,7 @@ import (
 // GetTasksList godoc
 // @Summary Get list of tasks
 // @Description Get list of all tasks
-// @Tags task
+// @Tags Task
 // @Accept json
 // @Produce json
 // @Success 200 {array} models.Task
@@ -30,7 +30,7 @@ func (h *Handler) GetTasksList(c *gin.Context) {
 // GetTasksByStatus godoc
 // @Summary Get tasks by status
 // @Description Get list of tasks by status name
-// @Tags task
+// @Tags Task
 // @Accept json
 // @Produce json
 // @Param name path string true "Status Name"
@@ -52,7 +52,7 @@ func (h *Handler) GetTasksByStatus(c *gin.Context) {
 // CreateTask godoc
 // @Summary Create a new task
 // @Description Create a new task with the provided information
-// @Tags task
+// @Tags Task
 // @Accept json
 // @Produce json
 // @Param input body models.Task true "Task info"
@@ -87,7 +87,7 @@ func (h *Handler) CreateTask(c *gin.Context) {
 // GetTaskById godoc
 // @Summary Get task by ID
 // @Description Get task details by ID
-// @Tags task
+// @Tags Task
 // @Accept json
 // @Produce json
 // @Param id path int true "Task ID"
@@ -114,7 +114,7 @@ func (h *Handler) GetTaskById(c *gin.Context) {
 // UpdateTask godoc
 // @Summary Update task
 // @Description Update task details by ID
-// @Tags task
+// @Tags Task
 // @Accept json
 // @Produce json
 // @Param id path int true "Task ID"
@@ -149,7 +149,7 @@ func (h *Handler) UpdateTask(c *gin.Context) {
 // DeleteTask godoc
 // @Summary Delete task
 // @Description Delete task by ID
-// @Tags task
+// @Tags Task
 // @Accept json
 // @Produce json
 // @Param id path int true "Task ID"

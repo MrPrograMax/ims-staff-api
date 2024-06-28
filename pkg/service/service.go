@@ -5,6 +5,10 @@ import (
 	"ims-staff-api/pkg/repository"
 )
 
+type Authorization interface {
+	ParseToken(token string) (int64, error)
+}
+
 type Task interface {
 	GetTasksList() ([]models.Task, error)
 	GetTasksByStatus(statusName string) ([]models.Task, error)
@@ -29,6 +33,7 @@ type Services struct {
 	Task
 	Status
 	Staff
+	Authorization
 }
 
 func NewService(repos *repository.Repository) *Services {

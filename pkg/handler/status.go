@@ -8,7 +8,7 @@ import (
 // GetStatusList godoc
 // @Summary Get list of statuses
 // @Description Get list of all task statuses
-// @Tags status
+// @Tags Status
 // @Accept json
 // @Produce json
 // @Success 200 {array} models.TaskStatus

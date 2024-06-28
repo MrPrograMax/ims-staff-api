@@ -5,6 +5,9 @@ import (
 	"ims-staff-api/models"
 )
 
+type Authorization interface {
+}
+
 type Task interface {
 	GetTasksList() ([]models.Task, error)
 	GetTasksByStatus(statusName string) ([]models.Task, error)
@@ -29,6 +32,7 @@ type Repository struct {
 	Task
 	Status
 	Staff
+	Authorization
 }
 
 func NewRepository(db *sqlx.DB) *Repository {

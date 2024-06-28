@@ -19,7 +19,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "UserDto"
+                    "Worker"
                 ],
                 "summary": "Get list of staff",
                 "responses": {
@@ -51,7 +51,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "UserDto"
+                    "Worker"
                 ],
                 "summary": "Get worker's tasks by ID",
                 "parameters": [
@@ -92,7 +92,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "UserDto"
+                    "Worker"
                 ],
                 "summary": "Assign a task to a worker",
                 "parameters": [
@@ -143,7 +143,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Get list of tasks",
                 "responses": {
@@ -173,7 +173,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Create a new task",
                 "parameters": [
@@ -219,7 +219,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "status"
+                    "Status"
                 ],
                 "summary": "Get list of statuses",
                 "responses": {
@@ -251,7 +251,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Get tasks by status",
                 "parameters": [
@@ -292,7 +292,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Get task by ID",
                 "parameters": [
@@ -334,7 +334,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Update task",
                 "parameters": [
@@ -385,7 +385,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "task"
+                    "Task"
                 ],
                 "summary": "Delete task",
                 "parameters": [
@@ -494,7 +494,7 @@
             }
         },
         "models.UserDto": {
-            "description": "UserDto model",
+            "description": "Worker model",
             "type": "object",
             "required": [
                 "full_name",
