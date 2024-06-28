@@ -3,7 +3,7 @@ package models
 // Task represents a task entity
 // @Description Task model
 type Task struct {
-	Id          int64  `json:"-"`
+	Id          int64  `json:"id"`
 	Title       string `json:"title" binding:"required" db:"title"`
 	Description string `json:"description" db:"description"`
 	StatusId    int64  `json:"status_id" db:"status_id"`
@@ -13,6 +13,6 @@ type Task struct {
 // TaskStatus represents a task status entity
 // @Description TaskStatus model
 type TaskStatus struct {
-	Id   int64  `json:"-"`
+	Id   int64  `json:"id"`
 	Name string `json:"name" db:"name"`
 }
