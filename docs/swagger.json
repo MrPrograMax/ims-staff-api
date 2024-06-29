@@ -191,7 +191,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.idResponse"
+                            "type": "integer"
                         }
                     },
                     "400": {
@@ -429,14 +429,6 @@
                 }
             }
         },
-        "handler.idResponse": {
-            "type": "object",
-            "properties": {
-                "status": {
-                    "type": "integer"
-                }
-            }
-        },
         "handler.statusResponse": {
             "type": "object",
             "properties": {
@@ -455,6 +447,9 @@
                 "description": {
                     "type": "string"
                 },
+                "id": {
+                    "type": "integer"
+                },
                 "status_id": {
                     "type": "integer"
                 },
@@ -470,6 +465,9 @@
             "description": "TaskStatus model",
             "type": "object",
             "properties": {
+                "id": {
+                    "type": "integer"
+                },
                 "name": {
                     "type": "string"
                 }
@@ -503,6 +501,9 @@
             "properties": {
                 "full_name": {
                     "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 },
                 "role_id": {
                     "type": "integer"

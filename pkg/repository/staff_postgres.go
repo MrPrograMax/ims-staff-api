@@ -25,7 +25,7 @@ func (s *StaffPostgres) GetStaffList() ([]models.UserDto, error) {
 func (s *StaffPostgres) GetWorkerTasksById(workerId int64) ([]models.Task, error) {
 	var workerTaskList []models.Task
 
-	query := fmt.Sprintf(`SELECT * FROM %s t WHERE t.id = $1`, taskTable)
+	query := fmt.Sprintf(`SELECT * FROM %s t WHERE t.user_id = $1`, taskTable)
 	err := s.db.Select(&workerTaskList, query, workerId)
 
 	return workerTaskList, err

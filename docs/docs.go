@@ -197,7 +197,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/handler.idResponse"
+                            "type": "integer"
                         }
                     },
                     "400": {
@@ -435,14 +435,6 @@ const docTemplate = `{
                 }
             }
         },
-        "handler.idResponse": {
-            "type": "object",
-            "properties": {
-                "status": {
-                    "type": "integer"
-                }
-            }
-        },
         "handler.statusResponse": {
             "type": "object",
             "properties": {
@@ -461,6 +453,9 @@ const docTemplate = `{
                 "description": {
                     "type": "string"
                 },
+                "id": {
+                    "type": "integer"
+                },
                 "status_id": {
                     "type": "integer"
                 },
@@ -476,6 +471,9 @@ const docTemplate = `{
             "description": "TaskStatus model",
             "type": "object",
             "properties": {
+                "id": {
+                    "type": "integer"
+                },
                 "name": {
                     "type": "string"
                 }
@@ -509,6 +507,9 @@ const docTemplate = `{
             "properties": {
                 "full_name": {
                     "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 },
                 "role_id": {
                     "type": "integer"
